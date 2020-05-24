@@ -1,0 +1,8 @@
+1,lowi,23
+2,lojun,33
+3,lili,20
+4,junjun,40
+5,lizi,31
+6,liwei,10
+7,wei,10
+8,jun,33
