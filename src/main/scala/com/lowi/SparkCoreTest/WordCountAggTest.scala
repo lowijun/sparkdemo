@@ -13,11 +13,11 @@ object WordCountAggTest {
     val conf = new SparkConf().setMaster("local[2]").setAppName("WordCountAggTest")
     val sc = new SparkContext(conf)
     sc.setLogLevel("warn")
-    val array = Array("you you","you you","you you",
-      "you you",
-      "you you",
-      "you you",
-      "you you",
+    val array = Array("you you","you you","you you","you you","you you","you you","you you","you you","you you","you you","you you","you you",
+      "you you","you you","you you","you you","you you","you you","you you","you you","you you","you you","you you","you you","you you",
+      "you you","you you","you you","you you","you you","you you","you you","you you","you you","you you","you you","you you","you you",
+      "you you","you you","you you","you you","you you","you you","you you","you you","you you","you you","you you","you you","you you",
+      "you you","you you","you you","you you","you you","you you","you you","you you","you you","you you","you you","you you","you you",
       "jump jump")
 
     val rdd = sc.parallelize(array, 8)

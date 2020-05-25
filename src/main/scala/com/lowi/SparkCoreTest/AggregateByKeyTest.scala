@@ -6,6 +6,9 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 import scala.collection.mutable.ArrayBuffer
 
+/**
+  * 指定ip下，第一次到现在访问次数总和统计，并显示第一次访问日期
+  */
 object AggregateByKeyTest {
   def main(args: Array[String]): Unit = {
     //构建sparkconf对象 设置application名称和master地址
@@ -28,21 +31,21 @@ object AggregateByKeyTest {
       ),2)
     //运用aggregateByKey(zeroValue)(seqOp, combOp, [numTasks])
     //1、U定义为ArrayBuffer
-    val juhe = pairRdd.aggregateByKey(ArrayBuffer[(String, Int)]())((arr,value)=>{
+    val juhe: RDD[(String, ArrayBuffer[(String, Int)])] = pairRdd.aggregateByKey(ArrayBuffer[(String, Int)]())((arr, value) => {
       //2、将value放入集合U中
       arr += value
       //3、将所有的集合进行合并
-    },_.union(_))
+    }, _.union(_))
     juhe.foreach(println(_))
 
     println("========================================================")
 
-    val juhesum = juhe.mapPartitions(partition=>{
-      partition.map(m=>{
+    val juhesum: RDD[Row] = juhe.mapPartitions(partition => {
+      partition.map(m => {
         val key = m._1
-        val date = m._2.map(m=>m._1).toList.sortWith(_<_)(0)
-        val sum = m._2.map(m=>m._2).sum
-        Row(key,date,sum)
+        val date = m._2.map(m => m._1).toList.sortWith(_ < _)(0)
+        val sum = m._2.map(m => m._2).sum
+        Row(key, date, sum)
       })
     })
     juhesum.foreach(println(_))
