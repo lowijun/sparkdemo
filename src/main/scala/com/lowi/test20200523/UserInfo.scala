@@ -94,7 +94,7 @@ object UserInfo {
     val result3: RDD[(String, (Int, Int))] = result1.join(result2)
     result3.foreach(println)
     println("====最终结果====")
-    result3.map(t => {(t._1, t._2._1.toDouble/ t._2._2.toDouble)}).sortBy(_._2, true).take(3).foreach(println)
+    result3.map(t => {(t._1, t._2._1.toDouble/ t._2._2.toDouble)}).sortBy(_._2, false).take(3).foreach(println)
 
     //关闭
     sc.stop()
