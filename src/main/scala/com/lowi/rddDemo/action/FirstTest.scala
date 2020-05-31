@@ -3,6 +3,10 @@ package com.lowi.rddDemo.action
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
+/**
+  * def first(): T
+  * first返回RDD中的第一个元素，不排序。
+  */
 object FirstTest {
   def main(args: Array[String]): Unit = {
     val sparkConf: SparkConf = new SparkConf().setMaster("local[2]").setAppName("FirstTest")
